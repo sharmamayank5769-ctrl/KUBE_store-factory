@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - K8s Store Factory</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="wrap">
+
+    <div class="header">
+        <h1>K8s Store Factory</h1>
+        <p>Manage your Kubernetes-based stores</p>
+        <div class="stats-bar">
+            <div class="stat-pill">🖥 1 / 3 Stores</div>
+            <div class="stat-pill">💾 3 / 5 Gi</div>
+            <div class="stat-pill">👤 demo_user</div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="section-top">
+        <h2>Your Stores</h2>
+        <div class="actions">
+          <button class="btn-create">+ New Store</button>
+            <button class="btn-refresh">↻</button>
+        </div>
+    </div>
+
+    <div id="stores-container"></div>
+
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

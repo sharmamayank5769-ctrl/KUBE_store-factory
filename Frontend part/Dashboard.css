@@ -1,0 +1,176 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f1f0f5;
+    min-height: 100vh;
+}
+
+.wrap { max-width: 500px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+.header {
+    background: #282431;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.8rem 1.4rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.header h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; color: #dcfce7;}
+.header p { font-size: 13px; color: #f6f7fa; }
+
+.stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+    
+    flex-wrap: wrap;
+}
+
+.stat-pill {
+    padding: 6px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    background: #f8fafc;
+    font-size: 13px;
+    color: #475569;
+}
+
+.logout-btn {
+    padding: 6px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    background: #f8fafc;
+    font-size: 13px;
+    color: #dc2626;
+    cursor: pointer;
+}
+
+.section-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.section-top h2 { font-size: 20px; font-weight: 600; }
+
+.actions { display: flex; gap: 8px; }
+
+.btn-create {
+    padding: 8px 16px;
+    background: rgb(119, 65, 169);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-refresh {
+    width: 34px; height: 34px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.store-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.store-card.ready        { border-left: 3px solid #16a34a; }
+.store-card.provisioning { border-left: 3px solid #ca8a04; }
+.store-card.failed       { border-left: 3px solid #dc2626; }
+
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.store-name { font-size: 15px; font-weight: 600; }
+
+.badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.badge.ready        { background: #dcfce7; color: #15803d; }
+.badge.provisioning { background: #fef9c3; color: #a16207; }
+.badge.failed       { background: #fee2e2; color: #b91c1c; }
+
+.card-info { display: grid; gap: 6px; margin-bottom: 1rem; }
+
+.info-row {
+    font-size: 13px;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-row a { color: rgb(119, 65, 169); text-decoration: none; }
+
+.creds {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 1rem;
+}
+
+.creds-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.cred-row {
+    font-size: 13px;
+    font-family: monospace;
+    color: #334155;
+    margin-bottom: 2px;
+}
+
+.cred-row span { color: #94a3b8; }
+
+.card-actions { display: flex; gap: 8px; }
+
+.btn-visit {
+    flex: 1; padding: 8px;
+    background: rgb(119, 65, 169);
+    color: white; border: none;
+    border-radius: 8px; font-size: 13px; cursor: pointer;
+}
+
+.btn-admin {
+    flex: 1; padding: 8px;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px; font-size: 13px; cursor: pointer;
+}
+
+.btn-delete {
+    padding: 8px 14px;
+    background: transparent;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+    border-radius: 8px; font-size: 13px; cursor: pointer;
+}
