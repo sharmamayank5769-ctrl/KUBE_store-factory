@@ -13,3 +13,13 @@ def  user_addone_controller():
 def user_getall_controller():
     result = obj.user_getall_model()
     return jsonify(result)
+
+@app.route('/user/login', methods=['POST'])
+def user_login_controller():
+    data = request.form
+    return jsonify(obj.user_login_model(data))
+
+@app.route('/user/addtwo', methods=['POST'])
+def user_addtwo_controller():
+    data = request.form
+    return jsonify(obj.user_addtwo_model(data))

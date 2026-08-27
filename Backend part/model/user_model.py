@@ -35,3 +35,14 @@ class user_model():
             return {"status": "success", "message": "Login successful"}
         else:
             return {"status": "failed", "message": "Invalid username or password"}
+        
+    def user_addtwo_model(self, data):
+        con = get_connection()
+        cur = con.cursor()
+        cur.execute(
+            "INSERT INTO users (username, password) VALUES (?, ?)",
+            (data['username'], data['password'])
+        )
+        con.commit()
+        con.close()
+        return {"message": "User added successfully"}

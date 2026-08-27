@@ -1,53 +1,75 @@
-// Storage update
-document.getElementById('storage-size').addEventListener('input', function() {
-    const size = parseInt(this.value) || 2;
-    document.getElementById('total-storage').textContent = size + 1;
-});
+console.log("JS is load !");
 
-// Password generate
-function generatePassword() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!';
-    let password = '';
-    for (let i = 0; i < 16; i++) {
-        password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    document.getElementById('admin-password').value = password;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM is ready");
 
-// Password copy
-function copyPassword() {
-    const password = document.getElementById('admin-password').value;
-    navigator.clipboard.writeText(password);
-    alert('Password copied!');
-}
-
-// Add product
-document.getElementById('add-product-btn').addEventListener('click', function() {
-    const row = document.createElement('div');
-    row.className = 'product-row';
-    row.innerHTML = `
-        <input type="text" placeholder="Product Name">
-        <input type="number" placeholder="Price">
-        <input type="text" placeholder="Description">
-        <button class="delete-product" onclick="this.parentElement.remove()">🗑</button>
-    `;
-    document.getElementById('products-list').appendChild(row);
-});
-
-// Existing delete buttons
-document.querySelectorAll('.delete-product').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        btn.parentElement.remove();
+    // Password generate
+    document.getElementById('generate-btn').addEventListener('click', function() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!';
+        let password = '';
+        for (let i = 0; i < 16; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('admin-password').value = password;
     });
-});
 
-// Launch store
-function launchStore() {
-    const password = document.getElementById('admin-password').value;
-    if (!password) {
-        alert('Password is required');
-        return;
-    }
-    alert('Store is launch !!');
-    window.location.href = 'Dashboard.html';
-}
+    // Password copy
+    document.getElementById('copy-btn').addEventListener('click', function() {
+        const password = document.getElementById('admin-password').value;
+        navigator.clipboard.writeText(password);
+        alert('Password copied!');
+    });
+
+    
+    document.getElementById('launch-btn').addEventListener('click', function() {
+
+    // check store
+        fetch('http://127.0.0.1:5000/store/getall')
+            .then(response => response.json())
+            .then(stores => {
+
+                if (stores.length >= 3) {
+                    alert('Store limit reached (3/3). delete any one store');
+                    return;
+                }
+
+                
+                const storage = document.getElementById('storage-size').value;
+                const storeId = Math.random().toString(36).substring(2, 10);
+
+                fetch('http://127.0.0.1:5000/store/addone', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        store_id: storeId,
+                        user_id: 1,
+                        storage: storage + 'Gi'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    window.location.href = 'Dashboard.html';
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('Store has some problem');
+                });
+
+            })
+            .catch(err => {
+                console.log(err);
+                alert('Could not check store limit');
+            });
+    });
+
+    // Cancel button
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+        window.location.href = 'Dashboard.html';
+    });
+
+    // Close button
+    document.getElementById('close-btn').addEventListener('click', function() {
+        window.location.href = 'Dashboard.html';
+    });
+
+});

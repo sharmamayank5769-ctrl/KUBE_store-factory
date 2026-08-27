@@ -13,62 +13,57 @@
 
         <div class="modal-header">
             <h2>Launch New Store</h2>
-            <button class="close-btn" onclick="window.location.href='Dashboard.html'">✕</button>
+            <button class="close-btn" id="close-btn">✕</button>
         </div>
 
-        <!-- Admin Password -->
         <div class="field">
             <label>Admin Password</label>
             <div class="password-row">
                 <input type="text" id="admin-password" value="NwAwoB$5fK#iN@le">
-                <button class="icon-btn" onclick="generatePassword()">↻</button>
-                <button class="icon-btn" onclick="copyPassword()">⧉</button>
+                <button class="icon-btn" id="generate-btn">↻</button>
+                <button class="icon-btn" id="copy-btn">⧉</button>
             </div>
             <p class="hint">This will be the password for the 'admin' user.</p>
         </div>
 
-        <!-- Storage Size -->
         <div class="field">
             <label>WordPress Storage Size (Gi)</label>
             <input type="number" id="storage-size" value="2" min="1" max="10">
             <p class="hint">Note: MySQL requires additional 1Gi. Total: <span id="total-storage">3</span>Gi</p>
         </div>
 
-        <!-- Products -->
-      <!-- Initial Products -->
-<div class="field">
-    <label>Initial Products</label>
-    <div id="products-list">
+        <div class="field">
+            <label>Initial Products</label>
+            <div id="products-list">
 
-        <div class="product-row">
-            <input type="text" placeholder="Product Name" value="Classic T-Shirt">
-            <input type="number" placeholder="Price" value="499">
-            <input type="text" placeholder="Description" value="A classic cotton t-shirt">
-            <button class="delete-product">🗑</button>
+                <div class="product-row">
+                    <input type="text" placeholder="Product Name" value="ADD">
+                    <input type="number" placeholder="Price" value="00">
+                    <input type="text" placeholder="Description" value="ADD">
+                    <button class="delete-product">🗑</button>
+                </div>
+
+                <div class="product-row">
+                    <input type="text" placeholder="Product Name" value="ADD">
+                    <input type="number" placeholder="Price" value="00">
+                    <input type="text" placeholder="Description" value="ADD">
+                    <button class="delete-product">🗑</button>
+                </div>
+
+                <div class="product-row">
+                    <input type="text" placeholder="Product Name" value="ADD">
+                    <input type="number" placeholder="Price" value="00">
+                    <input type="text" placeholder="Description" value="ADD">
+                    <button class="delete-product">🗑</button>
+                </div>
+
+            </div>
+            <button class="add-product-btn" id="add-product-btn">+ Add Product</button>
         </div>
 
-        <div class="product-row">
-            <input type="text" placeholder="Product Name" value="Denim Jeans">
-            <input type="number" placeholder="Price" value="1299">
-            <input type="text" placeholder="Description" value="Blue denim jeans">
-            <button class="delete-product">🗑</button>
-        </div>
-
-        <div class="product-row">
-            <input type="text" placeholder="Product Name" value="Sneakers">
-            <input type="number" placeholder="Price" value="2499">
-            <input type="text" placeholder="Description" value="Comfortable running shoes">
-            <button class="delete-product">🗑</button>
-        </div>
-
-    </div>
-    <button class="add-product-btn" id="add-product-btn">+ Add Product</button>
-</div>
-
-        <!-- Actions -->
         <div class="modal-actions">
-            <button class="cancel-btn" onclick="window.location.href='Dashboard.html'">Cancel</button>
-            <button class="launch-btn" onclick="launchStore()">Launch Store</button>
+            <button class="cancel-btn" id="cancel-btn">Cancel</button>
+            <button class="launch-btn" id="launch-btn">Launch Store</button>
         </div>
 
     </div>
