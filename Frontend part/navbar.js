@@ -22,6 +22,7 @@ function login() {
         if (data.status === 'success') {
             localStorage.setItem('isLoggedIn', 'true');   
             localStorage.setItem('username', username);  
+            localStorage.setItem('token', data.token);
             window.location.href = 'Dashboard.html';
         } else {
             error.style.display = 'block';

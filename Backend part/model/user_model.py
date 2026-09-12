@@ -1,10 +1,13 @@
 from database import get_connection
+from utils import generate_token, hash_password, check_password
+
 
 class user_model():
+
     def user_getall_model(self):
         con = get_connection()
         cur = con.cursor()
-        cur.execute("SELECT * FROM users")
+        cur.execute("SELECT id, username, created_at FROM users")
         result = cur.fetchall()
         con.close()
         users = [dict(row) for row in result]
@@ -13,9 +16,12 @@ class user_model():
     def user_addone_model(self, data):
         con = get_connection()
         cur = con.cursor()
+
+        hashed_pwd = hash_password(data['password'])
+
         cur.execute(
             "INSERT INTO users (username, password) VALUES (?, ?)",
-            (data['username'], data['password'])
+            (data['username'], hashed_pwd)
         )
         con.commit()
         con.close()
@@ -25,24 +31,14 @@ class user_model():
         con = get_connection()
         cur = con.cursor()
         cur.execute(
-            "SELECT * FROM users WHERE username = ? AND password = ?",
-            (data['username'], data['password'])
+            "SELECT * FROM users WHERE username = ?",
+            (data['username'],)
         )
         result = cur.fetchone()
         con.close()
 
-        if result:
-            return {"status": "success", "message": "Login successful"}
+        if result and check_password(data['password'], result['password']):
+            token = generate_token(data['username'])
+            return {"status": "success", "message": "Login successful", "token": token}
         else:
-            return {"status": "failed", "message": "Invalid username or password"}
-        
-    def user_addtwo_model(self, data):
-        con = get_connection()
-        cur = con.cursor()
-        cur.execute(
-            "INSERT INTO users (username, password) VALUES (?, ?)",
-            (data['username'], data['password'])
-        )
-        con.commit()
-        con.close()
-        return {"message": "User added successfully"}
+            return {"status": "failed", "message": "Invalid credentials"}

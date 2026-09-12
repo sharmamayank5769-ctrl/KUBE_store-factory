@@ -36,9 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const storage = document.getElementById('storage-size').value;
                 const storeId = Math.random().toString(36).substring(2, 10);
+                const token = localStorage.getItem('token'); 
 
                 fetch('http://127.0.0.1:5000/store/addone', {
                     method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token       
+                    },
                     body: new URLSearchParams({
                         store_id: storeId,
                         user_id: 1,

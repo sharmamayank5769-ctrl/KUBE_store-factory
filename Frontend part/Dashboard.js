@@ -1,18 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // first check
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = 'index.html';
-        return;
-    }
-        fetch('http://127.0.0.1:5000/store/getall')
+    const token = localStorage.getItem('token');
+
+    fetch('http://127.0.0.1:5000/store/getall', {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
         .then(response => response.json())
         .then(stores => {
 
-        //header part
-            document.getElementById('store-count').textContent = `🖥 ${stores.length} / 3 Stores`;
-            let totalStorage = stores.reduce((sum, s) => sum + parseInt(s.storage), 0);
-            document.getElementById('storage-count').textContent = `💾 ${totalStorage} / 5 Gi`;
+            // Store Count Update Karo
+            document.getElementById('store-count').textContent = `${stores.length} / 3`;
+
+            // Total Storage Calculate Karo
+            let totalStorage = 0;
+            stores.forEach(function(store) {
+                totalStorage += parseInt(store.storage);
+            });
+            document.getElementById('storage-count').textContent = `${totalStorage} / 5`;
 
             stores.forEach(function(store) {
                 const card = document.createElement('div');
@@ -39,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('stores-container').appendChild(card);
             });
-
         })
         .catch(err => {
             console.log('Error:', err);
@@ -51,18 +56,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-// Logout 
 function logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('username');
+    localStorage.removeItem('token');
     window.location.href = 'index.html';
 }
 
 function deleteStore(id) {
-    if (confirm('do you want to delete store')) {
+    if (confirm('Store delete karna chahte ho?')) {
+        const token = localStorage.getItem('token');
 
         fetch(`http://127.0.0.1:5000/store/delete/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
         })
         .then(response => response.json())
         .then(data => {
