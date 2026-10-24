@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(stores => {
 
-            // Store Count Update Karo
+            // Store Count Update 
             document.getElementById('store-count').textContent = `${stores.length} / 3`;
 
-            // Total Storage Calculate Karo
+            // Total Storage Calculate 
             let totalStorage = 0;
             stores.forEach(function(store) {
                 totalStorage += parseInt(store.storage);

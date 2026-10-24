@@ -1,7 +1,10 @@
 import sqlite3
+import os
+
+DB_PATH = os.getenv( 'DB_PATH', 'database.db')
 
 def get_connection():
-    con = sqlite3.connect('database.db')
+    con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     return con
 

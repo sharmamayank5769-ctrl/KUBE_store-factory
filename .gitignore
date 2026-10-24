@@ -7,3 +7,4 @@ Backend part/venv/
 Backend part/__pycache__/
 Backend part/model/__pycache__/
 Backend part/controller/__pycache__/
+SECRET_KEY = "kubestorefactory-secret-key-2026"

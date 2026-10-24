@@ -1,0 +1,22 @@
+services:
+ backend:
+  build: "./Backend part"
+  ports:
+   - "5000:5000"
+  environment:
+  #  - DB_PATH-/data/database.DB
+   - DB_PATH=/data/database.db
+   - SECRET_KEY=change-this-secret 
+  volumes:
+  - db-data:/data
+
+ frontend:
+  build: "./Frontend part"
+  ports:
+  - "8080:80"
+  depends_on:
+  - backend
+volumes:
+  db-data:
+
+

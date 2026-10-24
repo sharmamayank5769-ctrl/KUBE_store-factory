@@ -1,10 +1,11 @@
 import jwt
 import datetime
 import bcrypt
+import os
 from functools import wraps
 from flask import request, jsonify
 
-SECRET_KEY = "kubestorefactory-secret-key-2026"
+SECRET_KEY = os.getenv("SECRET_KEY" , "dev-secret-change-me")
 
 
 def generate_token(username):
