@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(stores => {
 
-            // Store Count Update 
+            // Store Count Update
             document.getElementById('store-count').textContent = `${stores.length} / 3`;
 
-            // Total Storage Calculate 
+            // Total Storage Calculate
             let totalStorage = 0;
             stores.forEach(function(store) {
                 totalStorage += parseInt(store.storage);
@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const card = document.createElement('div');
                 card.className = `store-card ${store.status}`;
 
-                const storeUrl = `http://store-${store.store_id}.storefactory.local`;
+                // Ingress abhi nahi hai, isliye store kholne ke liye port-forward command dikhate hain
+                const openCmd = `kubectl port-forward -n store-${store.store_id} svc/wordpress 8081:80`;
 
                 card.innerHTML = `
                     <div class="card-top">
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="badge ${store.status}">${store.status.toUpperCase()}</span>
                     </div>
                     <div class="card-info">
-                        <div class="info-row">🌐 <a href="${storeUrl}">${storeUrl}</a></div>
+                        <div class="info-row">🌐 Open: <code>${openCmd}</code> then http://localhost:8081</div>
                         <div class="info-row">📦 Store ID: ${store.store_id}</div>
                         <div class="info-row">👤 User ID: ${store.user_id}</div>
                         <div class="info-row">💾 ${store.storage} Storage</div>
@@ -45,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('stores-container').appendChild(card);
             });
+
+            // Koi store provisioning mein hai to 10 second baad page refresh (status badalne ke liye)
+            if (stores.some(function(s) { return s.status === 'provisioning'; })) {
+                setTimeout(function() { location.reload(); }, 10000);
+            }
         })
         .catch(err => {
             console.log('Error:', err);

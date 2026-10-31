@@ -20,28 +20,33 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Password copied!');
     });
 
-    
+
     document.getElementById('launch-btn').addEventListener('click', function() {
 
-    // check store
-        fetch('http://127.0.0.1:5000/store/getall')
+        const token = localStorage.getItem('token');
+
+        // check store limit (token ke saath)
+        fetch('http://127.0.0.1:5000/store/getall', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then(response => response.json())
             .then(stores => {
 
-                if (stores.length >= 3) {
+                if (Array.isArray(stores) && stores.length >= 3) {
                     alert('Store limit reached (3/3). delete any one store');
                     return;
                 }
 
-                
                 const storage = document.getElementById('storage-size').value;
-                const storeId = Math.random().toString(36).substring(2, 10);
-                const token = localStorage.getItem('token'); 
+                // sirf chhote akshar + ank (namespace ke liye), kam se kam 8 characters
+                const storeId = (Math.random().toString(36).substring(2) + '00000000').substring(0, 8);
 
                 fetch('http://127.0.0.1:5000/store/addone', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer ' + token       
+                        'Authorization': 'Bearer ' + token
                     },
                     body: new URLSearchParams({
                         store_id: storeId,
