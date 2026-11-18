@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const card = document.createElement('div');
                 card.className = `store-card ${store.status}`;
 
-                // Ingress abhi nahi hai, isliye store kholne ke liye port-forward command dikhate hain
+                // to open store giveing port forward command
                 const openCmd = `kubectl port-forward -n store-${store.store_id} svc/wordpress 8081:80`;
 
                 card.innerHTML = `
@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('stores-container').appendChild(card);
             });
-
-            // Koi store provisioning mein hai to 10 second baad page refresh (status badalne ke liye)
+//store provisioning to ready only in 10 seconds 
             if (stores.some(function(s) { return s.status === 'provisioning'; })) {
                 setTimeout(function() { location.reload(); }, 10000);
             }
@@ -68,7 +67,7 @@ function logout() {
 }
 
 function deleteStore(id) {
-    if (confirm('Store delete karna chahte ho?')) {
+    if (confirm('Do you want to delete store?')) {
         const token = localStorage.getItem('token');
 
         fetch(`http://127.0.0.1:5000/store/delete/${id}`, {

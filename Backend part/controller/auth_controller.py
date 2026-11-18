@@ -11,9 +11,6 @@ from store_k8s import create_store, delete_store, store_status
 
 obj = user_model()
 
-
-# ---------------- User routes (pehle wale, waise hi) ----------------
-
 @app.route('/user/addone', methods=['POST'])
 def user_addone_controller():
     data = request.form

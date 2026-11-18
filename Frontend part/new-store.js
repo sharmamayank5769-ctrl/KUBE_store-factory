@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 const storage = document.getElementById('storage-size').value;
-                // sirf chhote akshar + ank (namespace ke liye), kam se kam 8 characters
+                //only small letters and 8 characters 
                 const storeId = (Math.random().toString(36).substring(2) + '00000000').substring(0, 8);
 
                 fetch('http://127.0.0.1:5000/store/addone', {

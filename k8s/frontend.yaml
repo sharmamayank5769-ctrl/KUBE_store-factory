@@ -12,7 +12,7 @@ spec:
       labels:
         app: frontend
     spec:
-      containers:
+    containers:
         - name: frontend
           image: store-frontend
           imagePullPolicy: Never
